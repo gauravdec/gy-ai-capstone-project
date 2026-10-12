@@ -1,0 +1,21 @@
+trade_id,break_type,detail
+T1033,quantity,quantity FO=100 BO=1000
+T1023,price,price FO=191.0713 BO=192.0267
+T1075,settle_date,settle_date FO=2026-09-03 BO=2026-09-04
+T1083,counterparty,counterparty FO=Goldman Sachs International BO=Goldman Sachs & Co. LLC
+T1191,price,price FO=193.3838 BO=194.3507
+T1106,missing_in_bo,trade in FO but not in BO
+C9006,missing_in_fo,trade in BO but not in FO
+T1051,quantity,quantity FO=2500 BO=250
+T1138,price,price FO=2.1045 BO=2.094
+T1093,settle_date,settle_date FO=2026-09-09 BO=2026-09-10
+T1135,counterparty,counterparty FO=Barclays Bank PLC BO=Barclays Capital Securities Ltd
+T1128,price,price FO=666.6761 BO=673.3429
+T1069,missing_in_bo,trade in FO but not in BO
+C9013,missing_in_fo,trade in BO but not in FO
+T1065,quantity,quantity FO=10000 BO=1000
+T1123,price,price FO=4.5881 BO=4.634
+T1086,settle_date,settle_date FO=2026-10-08 BO=2026-10-09
+T1029,counterparty,counterparty FO=UBS AG London Branch BO=UBS Europe SE
+T1119,price,price FO=680.8907 BO=677.4862
+T1019,missing_in_bo,trade in FO but not in BO

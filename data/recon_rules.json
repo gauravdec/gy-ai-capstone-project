@@ -1,0 +1,62 @@
+[
+  {
+    "rule_id": "R01",
+    "title": "Matching key",
+    "text": "Trades are matched on trade_id. If no match, try ISIN + side + quantity + trade_date.",
+    "doc_type": "rule"
+  },
+  {
+    "rule_id": "R02",
+    "title": "Price tolerance",
+    "text": "Price differences within 0.1% are auto-matched. Above 0.1% is a price break and needs investigation.",
+    "doc_type": "rule"
+  },
+  {
+    "rule_id": "R03",
+    "title": "Quantity tolerance",
+    "text": "Quantity must match exactly. Any quantity difference is a break. Factor-of-10 differences suggest booking error; check broker confirm first.",
+    "doc_type": "rule"
+  },
+  {
+    "rule_id": "R04",
+    "title": "Settlement date",
+    "text": "Settlement date must match. Standard equity settlement is T+2 (business days). Check holiday calendars and agreed terms.",
+    "doc_type": "rule"
+  },
+  {
+    "rule_id": "R05",
+    "title": "Currency normalisation",
+    "text": "Normalise GBp to GBP (divide price by 100) before comparing. A GBP/GBp difference alone is not an economic break.",
+    "doc_type": "rule"
+  },
+  {
+    "rule_id": "R06",
+    "title": "Counterparty matching",
+    "text": "Counterparties should be compared by LEI where available. Name differences within the same group need legal entity check against broker confirm.",
+    "doc_type": "rule"
+  },
+  {
+    "rule_id": "R07",
+    "title": "Missing trades",
+    "text": "Trades in FO but not BO: check instruction status and SSIs. Trades in BO but not FO: raise with desk as potential unbooked trade, same day.",
+    "doc_type": "rule"
+  },
+  {
+    "rule_id": "R08",
+    "title": "Escalation - ageing",
+    "text": "Breaks open more than 1 business day escalate to team lead. More than 3 days escalate to Head of Operations.",
+    "doc_type": "rule"
+  },
+  {
+    "rule_id": "R09",
+    "title": "Escalation - value",
+    "text": "Any break with notional above 1,000,000 in trade currency is escalated immediately to team lead and the desk.",
+    "doc_type": "rule"
+  },
+  {
+    "rule_id": "R10",
+    "title": "Evidence",
+    "text": "Every break resolution must reference evidence: broker confirmation, custodian statement, or approved amendment.",
+    "doc_type": "rule"
+  }
+]
