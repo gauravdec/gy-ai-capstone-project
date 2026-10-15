@@ -1,0 +1,252 @@
+[
+  {
+    "break_type": "quantity",
+    "field": "quantity",
+    "description": "FO quantity 10000, custodian 1000. Factor of 10 difference.",
+    "root_cause": "Trader fat-finger: extra zero keyed in the order management system; custodian received the broker confirm with the correct quantity.",
+    "resolution": "Checked broker confirmation, which matched custodian. FO trade amended by desk; amendment approved by supervisor.",
+    "team": "Trade Support",
+    "break_id": "B001",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "quantity",
+    "field": "quantity",
+    "description": "FO shows full order quantity, custodian shows a smaller amount on the same day.",
+    "root_cause": "Partial fill: order executed in several fills, only the first fill settled to custodian by cut-off.",
+    "resolution": "Matched sum of fills from execution report. Remaining fills arrived next day; break auto-cleared.",
+    "team": "Middle Office",
+    "break_id": "B002",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "quantity",
+    "field": "quantity",
+    "description": "Quantity differs by a small odd amount between FO and custodian.",
+    "root_cause": "Corporate action (stock split / scrip dividend) applied at custodian but not yet in FO static data.",
+    "resolution": "Confirmed corporate action with custodian notice; FO position adjusted by corporate actions team.",
+    "team": "Corporate Actions",
+    "break_id": "B003",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "quantity",
+    "field": "quantity",
+    "description": "Block trade quantity in FO, custodian shows several smaller trades.",
+    "root_cause": "Block allocated to sub-accounts; custodian reports post-allocation, FO reports pre-allocation block.",
+    "resolution": "Reconciled allocations to block total. Recon rule updated to compare at allocation level.",
+    "team": "Middle Office",
+    "break_id": "B004",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "quantity",
+    "field": "quantity",
+    "description": "FO quantity is 10 times the custodian quantity for a UK equity.",
+    "root_cause": "Booking entered in wrong lot size on legacy booking screen.",
+    "resolution": "Desk corrected booking after confirming against broker confirm; added validation on lot size.",
+    "team": "Trade Support",
+    "break_id": "B005",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "price",
+    "field": "price",
+    "description": "Price difference of about 0.5% between FO and custodian.",
+    "root_cause": "FO booked average price across fills; custodian settled each fill at its execution price.",
+    "resolution": "Recalculated volume-weighted average price from fills; difference within tolerance after aggregation.",
+    "team": "Middle Office",
+    "break_id": "B006",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "price",
+    "field": "price",
+    "description": "Small price difference, consideration differs by the commission amount.",
+    "root_cause": "Custodian price is gross of commission, FO price is net (or vice versa).",
+    "resolution": "Compared net consideration instead of price; break closed. Recon config changed to compare net amounts.",
+    "team": "Reconciliations",
+    "break_id": "B007",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "price",
+    "field": "price",
+    "description": "Price breaks above tolerance on a late-afternoon trade.",
+    "root_cause": "Trader booked indicative price before execution; actual execution price differed.",
+    "resolution": "Desk amended FO price to broker confirmation price.",
+    "team": "Trade Support",
+    "break_id": "B008",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "price",
+    "field": "price",
+    "description": "Price mismatch on a US equity, around 1%.",
+    "root_cause": "Price rounding: FO stores 4 decimals, custodian 2 decimals, combined with an FX-converted booking.",
+    "resolution": "Confirmed economic amount matched; trade booked in wrong currency view, corrected to local currency.",
+    "team": "Reconciliations",
+    "break_id": "B009",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "settle_date",
+    "field": "settle_date",
+    "description": "Custodian settlement date one business day after FO.",
+    "root_cause": "Market holiday in settlement market not in FO holiday calendar, so FO calculated T+2 incorrectly.",
+    "resolution": "Holiday calendar updated in FO static data; settle date amended.",
+    "team": "Static Data",
+    "break_id": "B010",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "settle_date",
+    "field": "settle_date",
+    "description": "Settle date differs by one day, non-standard settlement.",
+    "root_cause": "Trade agreed with non-standard settlement (T+3) with counterparty but FO defaulted to T+2.",
+    "resolution": "Confirmed agreed settlement terms on broker confirm; FO amended.",
+    "team": "Trade Support",
+    "break_id": "B011",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "settle_date",
+    "field": "settle_date",
+    "description": "Settlement date mismatch for a trade around a weekend.",
+    "root_cause": "Booking system calculated settlement using calendar days rather than business days.",
+    "resolution": "Bug raised with booking system team; trade amended manually.",
+    "team": "Middle Office",
+    "break_id": "B012",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "settle_date",
+    "field": "settle_date",
+    "description": "Custodian shows later settle date after a failed settlement.",
+    "root_cause": "Settlement failed due to insufficient securities from counterparty; custodian rolled the date.",
+    "resolution": "Fail tracked with settlements team; FO expected settle date updated; buy-in monitored.",
+    "team": "Settlements",
+    "break_id": "B013",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "counterparty",
+    "field": "counterparty",
+    "description": "Counterparty names differ but belong to the same banking group.",
+    "root_cause": "Trader booked against the group's US entity; trade actually executed with the UK entity.",
+    "resolution": "Checked LEI on broker confirmation; FO counterparty amended to correct legal entity. Credit limits rechecked.",
+    "team": "Trade Support",
+    "break_id": "B014",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "counterparty",
+    "field": "counterparty",
+    "description": "Counterparty mismatch after a counterparty entity restructure.",
+    "root_cause": "Counterparty migrated business to new legal entity (Brexit-related); FO static data not updated.",
+    "resolution": "Static data updated with new entity and SSIs; open trades re-pointed.",
+    "team": "Static Data",
+    "break_id": "B015",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "counterparty",
+    "field": "counterparty",
+    "description": "Custodian shows a different counterparty name for the same LEI.",
+    "root_cause": "Naming difference only; same legal entity identifier in both systems.",
+    "resolution": "Recon matching switched from name to LEI; break was a false positive.",
+    "team": "Reconciliations",
+    "break_id": "B016",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "currency",
+    "field": "currency",
+    "description": "FO shows GBP, custodian shows GBp, price is 100 times higher at custodian.",
+    "root_cause": "UK equities quoted in pence (GBp) by custodian and exchange; FO stores pounds (GBP). Unit difference, not economic break.",
+    "resolution": "Normalised GBp to GBP (divide price by 100) before matching; break closed as presentation difference.",
+    "team": "Reconciliations",
+    "break_id": "B017",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "currency",
+    "field": "currency",
+    "description": "Trade currency differs between systems for a cross-listed stock.",
+    "root_cause": "Stock traded on secondary listing in different currency; FO static data pointed to primary listing.",
+    "resolution": "Corrected instrument listing (exchange/ISIN + currency) in FO.",
+    "team": "Static Data",
+    "break_id": "B018",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "currency",
+    "field": "currency",
+    "description": "Settlement currency differs from trade currency at custodian.",
+    "root_cause": "Client requested settlement in a different currency with FX at custodian.",
+    "resolution": "Compared on trade currency; FX leg reconciled separately.",
+    "team": "Settlements",
+    "break_id": "B019",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "missing_in_bo",
+    "field": "trade",
+    "description": "Trade exists in FO but not at custodian.",
+    "root_cause": "Late booking: trade booked after custodian instruction cut-off, instruction sent next day.",
+    "resolution": "Confirmed instruction sent next morning; break cleared on next recon cycle.",
+    "team": "Settlements",
+    "break_id": "B020",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "missing_in_bo",
+    "field": "trade",
+    "description": "FO trade never reached custodian.",
+    "root_cause": "Settlement instruction rejected due to missing or wrong SSI (standing settlement instruction).",
+    "resolution": "SSI corrected in static data; instruction resent; settlement date agreed with counterparty.",
+    "team": "Settlements",
+    "break_id": "B021",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "missing_in_bo",
+    "field": "trade",
+    "description": "FO trade missing at custodian; trade was cancelled by desk.",
+    "root_cause": "Trade cancelled in FO but cancellation not processed correctly, leaving a stale live trade in FO.",
+    "resolution": "Confirmed cancellation with desk; FO trade status corrected to cancelled.",
+    "team": "Trade Support",
+    "break_id": "B022",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "missing_in_fo",
+    "field": "trade",
+    "description": "Custodian reports a trade not found in FO.",
+    "root_cause": "Trade executed by broker under a give-up arrangement but not booked by desk.",
+    "resolution": "Desk confirmed trade; booked late in FO with supervisor approval. Escalated as unbooked trade.",
+    "team": "Trade Support",
+    "break_id": "B023",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "missing_in_fo",
+    "field": "trade",
+    "description": "Unknown trade at custodian.",
+    "root_cause": "Custodian booked trade to wrong account (belongs to another client).",
+    "resolution": "Raised DK (don't know) with custodian; trade moved to correct account.",
+    "team": "Settlements",
+    "break_id": "B024",
+    "doc_type": "past_break"
+  },
+  {
+    "break_type": "missing_in_fo",
+    "field": "trade",
+    "description": "Custodian trade with no FO match, matches a corporate action.",
+    "root_cause": "Custodian generated movement from a corporate action (e.g. scrip), not a real trade.",
+    "resolution": "Classified as corporate action movement; excluded from trade recon.",
+    "team": "Corporate Actions",
+    "break_id": "B025",
+    "doc_type": "past_break"
+  }
+]
